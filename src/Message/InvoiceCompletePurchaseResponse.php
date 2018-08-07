@@ -9,7 +9,7 @@
 namespace Omnipay\Xendit\Message;
 
 
-class InvoiceCompletePurchaseResponse
+class InvoiceCompletePurchaseResponse extends InvoicePurchaseResponse
 {
 
 }
