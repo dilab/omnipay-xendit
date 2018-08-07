@@ -17,8 +17,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "omnipay/common": "~2.0",
-        "xendit/xendit-php-clients": "^1.3"
+        "omnipay/common": "~2.0"
     },
     "require-dev": {
         "omnipay/tests": "~2.0"
