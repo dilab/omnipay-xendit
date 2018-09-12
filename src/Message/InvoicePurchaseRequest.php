@@ -17,14 +17,16 @@ class InvoicePurchaseRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        $this->httpClient->setConfig([
-            CURLOPT_USERPWD => $this->getSecretApiKey() . ':'
-        ]);
+        $this->httpClient->setDefaultOption(
+            'auth', array($this->getSecretApiKey(), '', 'Basic')
+        );
 
         $response = $this->httpClient
             ->post(
                 $this->getEndPoint(),
-                ['Content-Type' => 'application/json'],
+                [
+                    'Content-Type' => 'application/json'
+                ],
                 json_encode($data),
                 ['exceptions' => false]
             )
@@ -39,7 +41,7 @@ class InvoicePurchaseRequest extends AbstractRequest
         $this->guardAmount(intval($this->getAmount()));
 
         return [
-            'external_id' => $this->getTransactionId(),
+            'external_id' => (string)$this->getTransactionId(),
             'amount' => intval($this->getAmount()),
             'payer_email' => $this->getCard()->getEmail(),
             'description' => $this->getDescription()
