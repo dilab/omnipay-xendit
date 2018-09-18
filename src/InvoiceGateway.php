@@ -42,7 +42,7 @@ class InvoiceGateway extends AbstractGateway
 
     public function completePurchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Midtrans\Message\InvoiceCompletePurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\Xendit\Message\InvoiceCompletePurchaseRequest', $parameters);
     }
 
 }
