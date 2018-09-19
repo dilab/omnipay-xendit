@@ -9,7 +9,18 @@
 namespace Omnipay\Xendit\Message;
 
 
-class InvoiceCompletePurchaseRequest extends InvoicePurchaseRequest
+use Omnipay\Common\Message\ResponseInterface;
+
+class InvoiceCompletePurchaseRequest extends AbstractRequest
 {
+    public function getData()
+    {
+        return $this->httpRequest->request->all();
+    }
+
+    public function sendData($data)
+    {
+        return new InvoiceCompletePurchaseResponse($this, $data);
+    }
 
 }
