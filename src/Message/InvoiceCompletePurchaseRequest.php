@@ -15,7 +15,7 @@ class InvoiceCompletePurchaseRequest extends AbstractRequest
 {
     public function getData()
     {
-        return $this->httpRequest->request->all();
+        return json_decode($this->httpRequest->getContent(),true);
     }
 
     public function sendData($data)

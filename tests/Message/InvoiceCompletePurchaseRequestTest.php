@@ -11,6 +11,7 @@ namespace Omnipay\Tests\TestCase;
 use Omnipay\Tests\TestCase;
 use Omnipay\Xendit\Message\InvoiceCompletePurchaseRequest;
 use Omnipay\Xendit\Message\InvoiceCompletePurchaseResponse;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class InvoiceCompletePurchaseRequestTest extends TestCase
 {
@@ -55,7 +56,16 @@ class InvoiceCompletePurchaseRequestTest extends TestCase
             'updated' => "2018-09-18T03:39:11.027Z"
         ];
 
-        $this->getHttpRequest()->request->replace($expected);
+        $httpRequest = $this
+            ->getMockBuilder(HttpRequest::class)
+            ->getMock();
+
+        $httpRequest
+            ->expects($this->once())
+            ->method('getContent')
+            ->will($this->returnValue(json_encode($expected)));
+
+        $this->request = new InvoiceCompletePurchaseRequest($this->getHttpClient(), $httpRequest);
 
         $this->assertSame(
             $expected,
