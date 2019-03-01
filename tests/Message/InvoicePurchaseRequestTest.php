@@ -43,7 +43,8 @@ class InvoicePurchaseRequestTest extends TestCase
             'transactionId' => 'demo_1475801962607',
             'card' => [
                 'email' => 'sample_email@xendit.co',
-            ]
+            ],
+            'returnUrl' => 'https://mysite.com/success'
         ]);
 
         $this->request->setSecretApiKey('123456');
@@ -55,7 +56,8 @@ class InvoicePurchaseRequestTest extends TestCase
             'external_id' => 'demo_1475801962607',
             'amount' => (int)13000,
             'payer_email' => 'sample_email@xendit.co',
-            'description' => 'Trip to Bali'
+            'description' => 'Trip to Bali',
+            'success_redirect_url' => 'https://mysite.com/success'
         ];
 
         $this->assertSame(
