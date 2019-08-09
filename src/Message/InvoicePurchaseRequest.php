@@ -17,21 +17,18 @@ class InvoicePurchaseRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        $this->httpClient->setDefaultOption(
-            'auth', array($this->getSecretApiKey(), '', 'Basic')
-        );
-
         $response = $this->httpClient
-            ->post(
+            ->request(
+                'POST',
                 $this->getEndPoint(),
                 [
+                    'Authorization' => 'Basic ' . base64_encode($this->getSecretApiKey() . ':'),
                     'Content-Type' => 'application/json'
                 ],
-                json_encode($data),
-                ['exceptions' => false]
+                json_encode($data)
             )
-            ->send()
-            ->getBody(true);
+            ->getBody()
+            ->getContents();
 
         return new InvoicePurchaseResponse($this, $response);
     }

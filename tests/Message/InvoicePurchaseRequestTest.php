@@ -70,7 +70,7 @@ class InvoicePurchaseRequestTest extends TestCase
     {
         $this->request->setAmount(10000.00);
 
-        $this->setExpectedException(InvalidRequestException::class);
+        $this->expectException(InvalidRequestException::class);
 
         $this->request->getData();
     }
